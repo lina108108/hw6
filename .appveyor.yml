@@ -8,8 +8,8 @@ branches:
 
 build: off
 
-  install:
-    - java -jar ./artifacts/app-ibank-build-for-testers.jar&
+install:
+  - java -jar ./artifacts/app-ibank-build-for-testers.jar &
 
-  build_script:
-    - ./gradlew ru.netology.web.test --info "-Dselenide.headless=true"
+build_script:
+  - ./gradlew test --info "-Dselenide.headless=true"
