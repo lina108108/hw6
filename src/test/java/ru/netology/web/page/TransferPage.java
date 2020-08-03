@@ -1,0 +1,44 @@
+package ru.netology.web.page;
+
+import com.codeborne.selenide.Selectors;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
+import ru.netology.web.data.DataHelper;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+
+public class TransferPage {
+    private SelenideElement heading = $(byText("Пополнение карты"));
+    private SelenideElement amount = $("[data-ru.netology.web.test-id = amount] input");
+    private SelenideElement from = $("[data-ru.netology.web.test-id = from] input");
+    private SelenideElement transferButton = $("[data-ru.netology.web.test-id = action-transfer]");
+    private SelenideElement error = $("[data-ru.netology.web.test-id = error-notification]");
+
+    public TransferPage() {
+        heading.shouldBe(visible);
+    }
+
+    public DashboardPage moneyTransfer(DataHelper.TransferInfo info) {
+        amount.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        amount.doubleClick().sendKeys(Keys.DELETE);
+        amount.setValue(info.getAmount());
+        from.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        from.doubleClick().sendKeys(Keys.DELETE);
+        from.setValue(info.getCard());
+        transferButton.click();
+        return new DashboardPage();
+    }
+
+    public void invalidMoneyTransfer(DataHelper.TransferInfo info) {
+        amount.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        amount.doubleClick().sendKeys(Keys.DELETE);
+        amount.setValue(info.getAmount());
+        from.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        from.doubleClick().sendKeys(Keys.DELETE);
+        from.setValue(info.getCard());
+        transferButton.click();
+        error.shouldBe(visible);
+    }
+}
