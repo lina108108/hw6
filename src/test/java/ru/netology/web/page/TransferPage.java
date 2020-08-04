@@ -11,10 +11,10 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class TransferPage {
     private SelenideElement heading = $(byText("Пополнение карты"));
-    private SelenideElement amount = $("[data-ru.netology.web.test-id = amount] input");
-    private SelenideElement from = $("[data-ru.netology.web.test-id = from] input");
-    private SelenideElement transferButton = $("[data-ru.netology.web.test-id = action-transfer]");
-    private SelenideElement error = $("[data-ru.netology.web.test-id = error-notification]");
+    private SelenideElement amount = $("[data-test-id = amount] input");
+    private SelenideElement from = $("[data-test-id = from] input");
+    private SelenideElement transferButton = $("[data-test-id = action-transfer]");
+    private SelenideElement error = $("[data-test-id = error-notification]");
 
     public TransferPage() {
         heading.shouldBe(visible);
